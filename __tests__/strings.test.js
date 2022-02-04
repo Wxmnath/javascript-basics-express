@@ -3,7 +3,7 @@ const request = require('supertest');
 const app = require('../src/app');
 
 describe('/strings', () => {
-  describe('GET /hello/{string}', () => {
+  describe('GET /hello/string', () => {
     it('returns "Hello world!" when passed "world"', done => {
       request(app)
         .get('/strings/hello/world')
