@@ -47,7 +47,12 @@ const onlyEven = numbers => numbers.filter(number => number % 2 === 0);
 {
 }
 
-const removeNthElement2 = (index, array) => array.filter((_, itemIndex) => itemIndex !== index);
+// const removeNthElement2 = (index, array) => array.filter((_, itemIndex) => itemIndex !== index);
+const removeNthElement2 = (index, array) => {
+  const newArr = array.map(element => element);
+  newArr.splice(index, 1);
+  return newArr;
+};
 
 const elementsStartingWithAVowel = strings => {
   const vowels = ['a', 'e', 'i', 'o', 'u'];
