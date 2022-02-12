@@ -14,22 +14,22 @@ const csvStringToArray = string => string.split(',');
 
 const addToArray = (element, array) => {
   array.push(element);
+  return array;
 };
 
 const addToArray2 = (element, array) => array.concat([element]);
 {
 }
 
-const removeNthElement = (index, array) => array.splice(index, 1);
-{
-}
+const removeNthElement = (index, array) => {
+  return array.splice(index, 1);
+};
 
 const numbersToStrings = numbers => numbers.map(number => String(number));
 {
 }
 
-const uppercaseWordsInArray = strings =>
-  strings.map(word => word.toUpperCase());
+const uppercaseWordsInArray = strings => strings.map(word => word.toUpperCase());
 {
 }
 
@@ -38,7 +38,7 @@ const reverseWordsInArray = strings =>
     word
       .split('')
       .reverse()
-      .join('')
+      .join(''),
   );
 {
 }
@@ -47,10 +47,7 @@ const onlyEven = numbers => numbers.filter(number => number % 2 === 0);
 {
 }
 
-const removeNthElement2 = (index, array) =>
-  array.filter((_, itemIndex) => itemIndex !== index);
-{
-}
+const removeNthElement2 = (index, array) => array.filter((_, itemIndex) => itemIndex !== index);
 
 const elementsStartingWithAVowel = strings => {
   const vowels = ['a', 'e', 'i', 'o', 'u'];
@@ -98,5 +95,5 @@ module.exports = {
   elementsStartingWithAVowel,
   removeSpaces,
   sumNumbers,
-  sortByLastLetter
+  sortByLastLetter,
 };

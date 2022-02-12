@@ -1,6 +1,14 @@
 const express = require('express');
 const req = require('express/lib/request');
 const res = require('express/lib/response');
+const {
+  addToArray,
+  getNthElement,
+  arrayToCSVString,
+  elementsStartingWithAVowel,
+  removeNthElement,
+  removeNthElement2,
+} = require('./lib/arrays');
 const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
 const {
@@ -156,4 +164,34 @@ app.get('/booleans/:string/starts-with/:character', (req, res) => {
   res.status(200).json({ result: startsWith(req.params.character, req.params.string) });
 });
 
+// Arrays
+
+app.post('/arrays/element-at-index/:index', (req, res) => {
+  res.status(200).json({ result: getNthElement(req.params.index, req.body.array) });
+});
+
+app.post('/arrays/to-string', (req, res) => {
+  res.status(200).json({ result: arrayToCSVString(req.body.array) });
+});
+
+app.post('/arrays/append', (req, res) => {
+  res.status(200).json({ result: addToArray(req.body.value, req.body.array) });
+});
+
+app.post('/arrays/starts-with-vowel', (req, res) => {
+  res.status(200).json({ result: elementsStartingWithAVowel(req.body.array) });
+});
+
+app.post('/arrays/remove-element/:index', (req, res) => {
+  // if (!req.query.index && req.query.index !== 0) {
+  // res.status(200).json({ result: removeNthElement(0, req.body.array) });
+  // } else {
+  // res.status(200).json({ result: removeNthElement(req.query.index, req.body.array) });
+  // }
+});
+
 module.exports = app;
+
+app.post('/arrays/element-at-index/:index', (req, res) => {
+  res.status(200).json({ result: getNthElement(req.params.index, req.body.array) });
+});
