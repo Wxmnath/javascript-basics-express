@@ -6,6 +6,7 @@ const {
   getNthElement,
   arrayToCSVString,
   elementsStartingWithAVowel,
+  removeNthElement,
   removeNthElement2,
 } = require('./lib/arrays');
 const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
@@ -183,11 +184,5 @@ app.post('/arrays/starts-with-vowel', (req, res) => {
 
 app.post('/arrays/remove-element', (req, res) => {
   res.status(200).json({ result: removeNthElement2(req.query.index, req.body.array) });
-  // }
 });
-
 module.exports = app;
-
-// app.post('/arrays/element-at-index/:index', (req, res) => {
-//   res.status(200).json({ result: getNthElement(req.params.index, req.body.array) });
-// });

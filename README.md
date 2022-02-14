@@ -1,22 +1,20 @@
-# JavaScript Basics in Express
+# JavaScript Basics Using Express
 
-## Getting started
+Creating a Web API using Express that exposes the JavaScript functions solved in the first weeks of the course – JavaScript Basics.
 
-Ensure your Visual Studio Code application is up to date, and that you have the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) installed and enabled.
+---
 
-Run the commands below inside your `Projects` folder.
+## Motivation
 
-```bash
-git clone git@github.com:MCRcodes/javascript-basics-express.git
-cd your-project-folder-name
-npm install
-```
+A task in Manchester Codes bootcamp to help understand Web APIs using Express. Each test sends a request to an actual server,
+wait for the response and then make assertions about the response.
+
+---
 
 ## Copy over your JavaScript Basics code
 
-:rotating_light: **Important!**
-
-This exercise makes use of your previous `javascript-basics` code. Copy the files from that project's `src/` folder into a new `lib/` directory in this repository's `src` directory. You should end up with the following file structure in this project:
+Fork and cloned from this repository https://github.com/MCRcodes/javascript-basics-express
+Files from the JavaScrip-basics src/ folder copied in to a new lib/ directory in this repositors’s src directory, which looks like this:
 
 ```
 src
@@ -29,10 +27,35 @@ src
     └── strings.js
 ```
 
-## Running tests
+---
 
-You can run tests with the `npm test` command.
+## Concepts Followed
 
-## Remember: READMEs are important!
+Web servers and web APIs
+HTTP requests and responses
+Using Routers and Controllers.
+Retrieving route params, query params and body params from HTTP requests.
 
-When you're finished, be sure to rewrite this one so it's more specific to your project.
+---
+
+## Tech Used
+
+- NPM
+- Postman
+- Express.js
+- Jest
+
+---
+
+## Status
+
+- [x] Started
+- [ ] Awaiting Code Review
+- [ ] Completed
+
+---
+
+## Credits
+
+Manchester Codes Bootcamp 2022
+Nathan Humphreys October 2021 Cohort
