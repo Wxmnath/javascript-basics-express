@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 const express = require('express');
 const req = require('express/lib/request');
 const res = require('express/lib/response');
@@ -6,7 +7,6 @@ const {
   getNthElement,
   arrayToCSVString,
   elementsStartingWithAVowel,
-  removeNthElement,
   removeNthElement2,
 } = require('./lib/arrays');
 const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
@@ -36,10 +36,6 @@ app.get('/strings/lower/:string', function(req, res) {
   res.status(200).json({ result: lowercase(req.params.string) });
 });
 
-/* app.get('/strings/first-character/:string', function(req, res) {
-  res.status(200).json({ result: firstCharacter(req.params.string.charAt(0)) });
-}); */
-
 app.get('/strings/first-characters/:string', (req, res) => {
   const { string } = req.params; // const string = req.params.string;
   const { length } = req.query;
@@ -54,46 +50,58 @@ app.get('/strings/first-characters/:string', (req, res) => {
 // http://localhost:3000/strings/first-characters/hello?length=4
 // result: hell
 
-// NUMBERS
+// NUMBERS Addition & Subtraction
 
-app.get('/numbers/add/:a/and/:b', (req, res) => {
-  const a = parseInt(req.params.a);
-  const b = parseInt(req.params.b);
-
-  if (Number.isNaN(a) || Number.isNaN(b)) {
+const checkNumbersFromParameters = ({ a, b }, res, func) => {
+  if (Number.isNaN(parseInt(a)) || Number.isNaN(parseInt(b))) {
     res.status(400).json({ error: 'Parameters must be valid numbers.' });
   } else {
-    res.status(200).json({ result: add(a, b) });
+    return func ? add(parseInt(a), parseInt(b)) : subtract(parseInt(b), parseInt(a));
   }
+};
+
+app.get('/numbers/add/:paramNum1/and/:paramNum2', (req, res) => {
+  const result = checkNumbersFromParameters(
+    { a: req.params.paramNum1, b: req.params.paramNum2 },
+    res,
+    true, // calls func and true to call back add code
+  );
+  res.status(200).json({ result });
 });
 
-app.get('/numbers/subtract/:c/from/:d', (req, res) => {
-  const c = parseInt(req.params.c);
-  const d = parseInt(req.params.d);
-
-  if (Number.isNaN(c) || Number.isNaN(d)) {
-    res.status(400).json({ error: 'Parameters must be valid numbers.' });
-  } else {
-    res.status(200).json({ result: subtract(d, c) });
-  }
+app.get('/numbers/subtract/:paramNum1/from/:paramNum2', (req, res) => {
+  const result = checkNumbersFromParameters(
+    { b: req.params.paramNum2, a: req.params.paramNum1 },
+    res,
+    false, // calls func and false as its a subtract
+  );
+  res.status(200).json({ result });
 });
 
-// eslint-disable-next-line no-shadow
-app.post('/numbers/multiply', (req, res) => {
-  const a = parseInt(req.body.a);
-  const b = parseInt(req.body.b);
+// NUMBERS Multiply
 
+function checkNumbersFromBodies(req, res) {
+  console.log('test');
   if (!req.body.a || !req.body.b) {
     res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
   }
-  if (Number.isNaN(a) || Number.isNaN(b)) {
+  const bodyNum1 = parseInt(req.body.a);
+  const bodyNum2 = parseInt(req.body.b);
+
+  if (Number.isNaN(bodyNum1) || Number.isNaN(bodyNum2)) {
     res.status(400).json({ error: 'Parameters "a" and "b" must be valid numbers.' });
   } else {
-    res.status(200).json({ result: multiply(a, b) });
+    return multiply(bodyNum1, bodyNum2);
   }
+}
+
+app.post('/numbers/multiply', (req, res) => {
+  const result = checkNumbersFromBodies(req, res);
+  res.status(200).json({ result });
 });
 
-// sequence of the if staements are improtant for all these to pass.
+// NUMBERS Divide
+
 app.post('/numbers/divide', (req, res) => {
   const a = parseInt(req.body.a);
   const b = parseInt(req.body.b);
